@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:udemyp/quizapp/quiz.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    var filename = 'files/gol.mp3';
+    return MaterialApp(
+      home: Scaffold(appBar: AppBar(), body: MyBody()),
+    );
+  }
+}
+
+class MyBody extends StatelessWidget {
+  MyBody({Key? key}) : super(key: key);
+
   final audioplayer = AudioPlayer();
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -21,57 +34,53 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var filename = 'files/gol.mp3';
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          //Todo: Audio Player not working
           children: [
-            Column(
-              //Todo: Audio Player not working
+            Slider(
+                value: position.inSeconds.toDouble(),
+                min: 0,
+                onChanged: (value) async {}),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Slider(
-                    value: position.inSeconds.toDouble(),
-                    min: 0,
-                    onChanged: (value) async {}),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(formatTime(position)),
-                    Text(formatTime(duration - position)),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (isPlaying) {
-                      await audioplayer.pause();
-                    } else {
-                      String url = "files/pyar.mp3";
-                      //await audioplayer.se;
-                    }
-
-                    // audioplayer.setSource(AssetSource('files/pyar.mp3'));
-                    //player.seek(Duration(seconds: 1200));
-                    //print(player.toString());
-                  },
-                  child: Icon(Icons.play_arrow),
-                ),
+                Text(formatTime(position)),
+                Text(formatTime(duration - position)),
               ],
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    //player.play(filename);
-                  },
-                  child: Icon(Icons.quiz),
-                ),
-              ],
+            ElevatedButton(
+              onPressed: () async {
+                if (isPlaying) {
+                  await audioplayer.pause();
+                } else {
+                  String url = "files/pyar.mp3";
+                  //await audioplayer.se;
+                }
+
+                // audioplayer.setSource(AssetSource('files/pyar.mp3'));
+                //player.seek(Duration(seconds: 1200));
+                //print(player.toString());
+              },
+              child: Icon(Icons.play_arrow),
             ),
           ],
         ),
-      ),
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                print("quiz");
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Quiz()));
+              },
+              child: Icon(Icons.quiz),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
