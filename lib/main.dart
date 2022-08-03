@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:udemyp/bmiapp/bmi_main.dart';
 import 'package:udemyp/quizapp/quiz.dart';
 
 void main() {
@@ -37,8 +38,9 @@ class MyBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        //Todo: Audio Player not working
         Column(
-          //Todo: Audio Player not working
+
           children: [
             Slider(
                 value: position.inSeconds.toDouble(),
@@ -68,6 +70,8 @@ class MyBody extends StatelessWidget {
             ),
           ],
         ),
+
+        // buttons
         Row(
           children: [
             ElevatedButton(
@@ -77,6 +81,14 @@ class MyBody extends StatelessWidget {
                     context, MaterialPageRoute(builder: (context) => Quiz()));
               },
               child: Icon(Icons.quiz),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print("Bmi");
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => BmiMain()));
+              },
+              child: const Text("Bmi Calculator"),
             ),
           ],
         ),
