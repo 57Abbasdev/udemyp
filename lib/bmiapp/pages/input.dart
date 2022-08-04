@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:udemyp/bmiapp/reusable.dart';
+import 'package:udemyp/bmiapp/calculate_bmi.dart';
+import 'package:udemyp/bmiapp/pages/result.dart';
+import 'package:udemyp/bmiapp/widgets/btn.dart';
+import 'package:udemyp/bmiapp/widgets/reusable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon.dart';
-import 'constants.dart';
+import '../widgets/bottom_button.dart';
+import '../widgets/icon.dart';
+import '../constants.dart';
 
 class Input extends StatefulWidget {
   const Input({Key? key}) : super(key: key);
@@ -13,7 +17,7 @@ class Input extends StatefulWidget {
 
 //font_awesome_flutter
 class _InputState extends State<Input> {
-  var age, weight;
+  var age = 10, weight = 20;
   int height = 180;
   Gender selectedGender = Gender.male;
 
@@ -116,51 +120,105 @@ class _InputState extends State<Input> {
                 ],
               ),
             )),
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: MyContainer(
-                        onPress: () {
-                          setState(() {});
-                        },
-                        childWidget: Column(
-                          children: [
-                            Text("AGE"),
-                            Text(age.toString()),
-                            Row(
-                              children: [Icon(Icons.add), Icon(Icons.remove)],
-                            )
-                          ],
-                        ),
-                      )),
-                    ],
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MyContainer(
+                      childWidget: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "WEIGHT",
+                            style: kLabelStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kStrongStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CounterButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPress: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              ),
+                              CounterButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPress: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: MyContainer(
-                        onPress: () {
-                          setState(() {});
-                        },
-                        childWidget: Column(
-                          children: [
-                            Text("AGE"),
-                            Text(age.toString()),
-                            Row(
-                              children: [Icon(Icons.add), Icon(Icons.remove)],
-                            )
-                          ],
+                  Expanded(
+                      child: MyContainer(
+                    childWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "AGE",
+                          style: kLabelStyle,
                         ),
-                      )),
-                    ],
-                  ),
-                ),
-              ],
+                        Text(
+                          age.toString(),
+                          style: kStrongStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CounterButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                            CounterButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )),
+                ],
+              ),
+            ),
+            Container(
+              height: kBottomContainerHeight,
+              width: double.maxFinite,
+              color: kActiveColor,
+              child: BottomButton(
+                buttonTitle: 'CALCULATE',
+                onTap: () {
+                  CalculatorBrain cBrain =
+                      CalculatorBrain(height: height, weight: weight);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ResultsPage(
+                      interpretation: cBrain.getInterpretation(),
+                      resultText: cBrain.getResult(),
+                      bmiResult: cBrain.calculateBMI(),
+                    );
+                  }));
+                },
+              ),
             )
           ],
         ));

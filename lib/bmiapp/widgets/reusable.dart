@@ -5,7 +5,7 @@ class MyContainer extends StatelessWidget {
   final Widget childWidget;
   final onPress;
 
-  MyContainer({this.color, required this.childWidget, required this.onPress});
+  MyContainer({this.color, required this.childWidget,  this.onPress});
 
   @override
   Widget build(BuildContext context) {

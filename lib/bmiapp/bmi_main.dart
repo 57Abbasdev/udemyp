@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemyp/bmiapp/input.dart';
+import 'package:udemyp/bmiapp/pages/input.dart';
 
 
 class BmiMain extends StatelessWidget {
