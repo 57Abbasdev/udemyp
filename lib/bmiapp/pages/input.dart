@@ -111,7 +111,7 @@ class _InputState extends State<Input> {
                         min: 20.0,
                         max: 250,
                         onChanged: (newValue) {
-                          print(newValue);
+                          //print(newValue);
                           setState(() {
                             height = newValue.round();
                           });
@@ -208,8 +208,10 @@ class _InputState extends State<Input> {
               child: BottomButton(
                 buttonTitle: 'CALCULATE',
                 onTap: () {
+
                   CalculatorBrain cBrain =
                       CalculatorBrain(height: height, weight: weight);
+                  print(cBrain.height+cBrain.weight);
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ResultsPage(
                       interpretation: cBrain.getInterpretation(),
@@ -217,6 +219,8 @@ class _InputState extends State<Input> {
                       bmiResult: cBrain.calculateBMI(),
                     );
                   }));
+
+                  print(cBrain.bmi);
                 },
               ),
             )
