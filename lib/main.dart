@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:udemyp/bmiapp/bmi_main.dart';
 import 'package:udemyp/quizapp/quiz.dart';
 
+import 'clima/climaMain.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -89,7 +91,14 @@ class MyBody extends StatelessWidget {
                     context, MaterialPageRoute(builder: (context) => const BmiMain()));
               },
               child: const Text("Bmi Calculator"),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const ClimaMain()));
+              },
+              child: const Text("Clima App"),
+            ),
           ],
         ),
       ],
