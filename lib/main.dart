@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
 class MyBody extends StatelessWidget {
   MyBody({Key? key}) : super(key: key);
 
-  final audioplayer = AudioPlayer();
+  final audioPlayer = AudioPlayer();
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
@@ -56,7 +56,7 @@ class MyBody extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 if (isPlaying) {
-                  await audioplayer.pause();
+                  await audioPlayer.pause();
                 } else {
                   String url = "files/pyar.mp3";
                   //await audioplayer.se;
@@ -66,30 +66,30 @@ class MyBody extends StatelessWidget {
                 //player.seek(Duration(seconds: 1200));
                 //print(player.toString());
               },
-              child: Icon(Icons.play_arrow),
+              child: const Icon(Icons.play_arrow),
             ),
           ],
         ),
 
         // buttons
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ElevatedButton(
               onPressed: () {
                 print("quiz");
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Quiz()));
+                    context, MaterialPageRoute(builder: (context) => const Quiz()));
               },
-              child: Icon(Icons.quiz),
+              child: const Text("Quiz"),
             ),
             ElevatedButton(
               onPressed: () {
-                print("Bmi");
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => BmiMain()));
+                    context, MaterialPageRoute(builder: (context) => const BmiMain()));
               },
               child: const Text("Bmi Calculator"),
-            ),
+            )
           ],
         ),
       ],
