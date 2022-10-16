@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemyp/clima/screens/loading_screen.dart';
+import 'package:udemyp/climaApp/screens/loading_screen.dart';
 
 
 

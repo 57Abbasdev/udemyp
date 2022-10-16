@@ -1,9 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:udemyp/AgeCalculator/age_main.dart';
 import 'package:udemyp/bmiapp/bmi_main.dart';
 import 'package:udemyp/quizapp/quiz.dart';
 
-import 'clima/climaMain.dart';
+import 'climaApp/climaMain.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     var filename = 'files/gol.mp3';
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(appBar: AppBar(), body: MyBody()),
     );
   }
@@ -42,7 +44,6 @@ class MyBody extends StatelessWidget {
       children: [
         //Todo: Audio Player not working
         Column(
-
           children: [
             Slider(
                 value: position.inSeconds.toDouble(),
@@ -74,31 +75,38 @@ class MyBody extends StatelessWidget {
         ),
 
         // buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Wrap(
+        //  mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ElevatedButton(
               onPressed: () {
                 print("quiz");
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const Quiz()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Quiz()));
               },
               child: const Text("Quiz"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const BmiMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const BmiMain()));
               },
               child: const Text("Bmi Calculator"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const ClimaMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ClimaMain()));
               },
               child: const Text("Clima App"),
             ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AgeMain()));
+              },
+              child: Text("Age Calculator"),
+            )
           ],
         ),
       ],
